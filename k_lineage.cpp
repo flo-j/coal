@@ -24,7 +24,7 @@ public:
 	}
 
 	//constructeur 
-	Coal(){}
+	Coal(){} // pourquoi c'est necessaire ? a chercher
 
 	Coal(unsigned int id) :
 	m_pere(0),
@@ -32,6 +32,7 @@ public:
 	m_gen(0)
 	{	}
 
+	// les méthodes 
 	void set_pere(unsigned int pere){
 		m_pere=pere;
 	}
@@ -42,13 +43,15 @@ public:
 		return m_id;
 	}
 };
-Coal find_coal(vector<Coal> vec,unsigned int id){
+
+
+int find_coal(vector<Coal> vec,unsigned int id){
 	unsigned int i=0;
 	while(vec[i].get_id()!=id){
 		i++;
 	}
 	//vec[i].affi();
-	return vec[i];
+	return i;
 }
 void affi_vec_coal(vector<Coal> res){
 	for(unsigned int i=0;i<res.size();i++){
@@ -69,10 +72,17 @@ void init_vec(vector<int>& vec,int k){ // initialise le vecteur des possibles
 	}
 	//cout << "fin initialise" << endl;
 }
-int simulate(int N,int& compt){
+void aff_vec(vector<int>& vec){
+	for(unsigned int i=0;i<vec.size();i++){
+		cout << vec[i] << "\t";
+	}
+	cout << endl;
+}
+
+int simulate(int N){
 	int lineage_1;
 	int lineage_2;
-	
+	int compt=0;
 	lineage_1=random_nb(N);
 	lineage_2=random_nb(N);
 
@@ -84,19 +94,66 @@ int simulate(int N,int& compt){
 	return compt+1;
 }
 
+void trouve_2suiv(vector<int>& vec,vector<Coal>& res, unsigned& k,unsigned int& nb_gen,unsigned int N){
+	unsigned int first;
+	unsigned int second;
+	int c_first;
+	int c_second;
+	//cout << k << endl;
+	first=random_nb(vec.size())-1;
+	c_first=find_coal(res,first);
+	cout << " c_first " << c_first << " first " << first << endl;
+	cout << " res[c_first]" << endl;
+	res[c_first].affi();
+	res[c_first].set_pere(k);
+	cout << "res[c_first].setpere" << endl;
+	res[c_first].affi();
+	//cout << " c_first " << c_first << " first " << first << endl;
+	cout << "affichage vecteur des possibles" << endl;
+	aff_vec(vec);
+	//cout << "dans trouve_2 " << vec.size() << endl;
+	vec.erase(vec.begin()+first);
+	aff_vec(vec);
+	//cout << "dans trouve_2 " << vec.size() << endl;
+	second=random_nb(vec.size())-1;
+	c_second=find_coal(res,second);
+	cout << " c_second " << c_second << " second " << second << endl;
+	cout << " res[c_second]" << endl;
+	res[c_second].affi();
+	res[c_second].set_pere(k);
+	res[c_second].affi();
+	aff_vec(vec);
+	vec.erase(vec.begin()+second);
+	aff_vec(vec);
+	vec.push_back(k);
+	aff_vec(vec);
+	k++;
+	nb_gen+=simulate(N);
+	res[c_first].set_gen(nb_gen);
+	//c_first.affi();
+	res[c_second].set_gen(nb_gen);
+	//c_second.affi();
 
+}
 
 int main(){
-	int k=4;
+	unsigned int k=4;
+	unsigned int N=k;
 	vector<Coal> res;
 	res.size();
 	vector<int> vec_possible;
-	for(int i=0;i<2*k-1;i++){
+	init_vec(vec_possible,k);
+	unsigned int nb_gen=0;
+	for(unsigned int i=0;i<2*k-1;i++){
 		Coal obj(i);
 		res.push_back(obj);
-		obj.affi();
-	}
+		//obj.affi();
+			}
 	while(vec_possible.size()>=2){
+	//for(int i=0;i<4;i++){
+		//cout << "taille du vecteur des possibles" << vec_possible.size() << endl;
+		trouve_2suiv(vec_possible,res,k,nb_gen,N);
+		//affi_vec_coal(res);
 
 	}
 	cout << " le vecteur "<<endl;
