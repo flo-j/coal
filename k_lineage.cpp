@@ -108,12 +108,15 @@ void trouve_test(vector<unsigned int>& vec,vector<Coal>& res,unsigned int& k,uns
 	int place_coal_a_modifier;
 	int nb_ale;
 	int celui_quon_veut;
-	nb_ale=random_nb(vec.size()-1);
-	cout << "nombre aleatoire" << nb_ale << endl;
+	cout << "avant nb_al" << endl;
+	nb_ale=random_nb(vec.size())-1;
+	cout << "apres nb_al" <<endl;
+	//cout << "nombre aleatoire" << nb_ale << endl;
 	coal_a_modifier=vec[nb_ale];
 	cout << "la position " << nb_ale <<" correspond au coal n°" << coal_a_modifier << endl;
+	cout<< "avant affi vecteur" << endl;
 	aff_vec(vec);
-	cout << "celui qu'on veut " << nb_ale << endl;
+	//cout << "celui qu'on veut " << nb_ale << endl;
 	celui_quon_veut=find_c(res,coal_a_modifier);
 	//cout << "coal a modifier " << coal_a_modifier << "a la base " << nb_ale << endl;
 	res[celui_quon_veut].affi();
@@ -128,6 +131,7 @@ void trouve_test(vector<unsigned int>& vec,vector<Coal>& res,unsigned int& k,uns
 void fait_tout(vector<unsigned int>& vec,vector<Coal>& res,unsigned int& k,unsigned int& nb_gen,unsigned int N,unsigned int nb_coal){
 	nb_gen+=simulate(N);
 	for(unsigned int i=0;i<nb_coal;i++){
+		cout << "boucle for, dans fait_tout" << endl;
 		trouve_test(vec,res,k,nb_gen,N);
 	}
 	k++;
