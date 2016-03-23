@@ -110,7 +110,7 @@ void trouve_test(vector<unsigned int>& vec,vector<Coal>& res,unsigned int& k,uns
 	int celui_quon_veut;
 	nb_ale=random_nb(vec.size()-1);
 	cout << "nombre aleatoire" << nb_ale << endl;
-	place_coal_a_modifier=find_coal(vec,nb_ale);
+	place_coal_a_modifier=vec[nb_ale];
 	cout << "le coal n°" << nb_ale <<" se trouve en postion " << place_coal_a_modifier << endl;
 	aff_vec(vec);
 	coal_a_modifier=vec[place_coal_a_modifier];
