@@ -103,7 +103,7 @@ int simulate(int N){
 	}
 	return compt+1;
 }
-void trouve_test(vector<unsigned int>& vec,vector<Coal>& res, unsigned& k,unsigned int& nb_gen,unsigned int N) {
+void trouve_test(vector<unsigned int>& vec,vector<Coal>& res,unsigned int& k,unsigned int& nb_gen,unsigned int N) {
 	int coal_a_modifier;
 	int place_coal_a_modifier;
 	int nb_ale;
@@ -113,16 +113,27 @@ void trouve_test(vector<unsigned int>& vec,vector<Coal>& res, unsigned& k,unsign
 	cout << "le coal n°" << nb_ale <<" se trouve en postion " << place_coal_a_modifier << endl;
 	aff_vec(vec);
 	coal_a_modifier=vec[place_coal_a_modifier];
-	celui_quon_veut=find_c(res,coal_a_modifier);
-	cout << "coal a modifier " << coal_a_modifier << "a la base " << nb_ale << endl;
+	cout << "celui qu'on veut " << nb_ale << endl;
+	celui_quon_veut=find_c(res,nb_ale);
+	//cout << "coal a modifier " << coal_a_modifier << "a la base " << nb_ale << endl;
 	res[celui_quon_veut].affi();
 	res[celui_quon_veut].set_pere(k);
+	res[celui_quon_veut].set_gen(nb_gen);
+	res[celui_quon_veut].affi();
 	vec.erase(vec.begin()+place_coal_a_modifier);
 	aff_vec(vec);
-	
 
 }
 
+void fait_tout(vector<unsigned int>& vec,vector<Coal>& res,unsigned int& k,unsigned int& nb_gen,unsigned int N,unsigned int nb_coal){
+	nb_gen+=simulate(N);
+	for(unsigned int i=0;i<nb_coal;i++){
+		trouve_test(vec,res,k,nb_gen,N);
+	}
+	k++;
+	vec.push_back(k);
+	
+}
 
 int main(){
 	unsigned int k=4;
@@ -134,7 +145,6 @@ int main(){
 	unsigned int nb_gen=0;
 	vector<unsigned int> vec_test;
 	int var_test;
-	vec_test.push_back(4);
 	vec_test.push_back(3);
 	vec_test.push_back(0);
 	vec_test.push_back(1);
@@ -156,7 +166,7 @@ int main(){
 		//affi_vec_coal(res);
 
 	}*/
-	trouve_test(vec_test,res,k,nb_gen,N);
+	fait_tout(vec_test,res,k,nb_gen,N,2);
 	//trouve_2suiv(vec_possible,res,k,nb_gen,N);	
 
 	//cout << " le vecteur "<<endl;
