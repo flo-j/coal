@@ -44,7 +44,6 @@ public:
 	}
 };
 
-
 int find_coal(vector<unsigned int> vec,unsigned int id){
 	unsigned int i=0;
 	cout << "douze" << endl;
@@ -55,7 +54,8 @@ int find_coal(vector<unsigned int> vec,unsigned int id){
 	//vec[i].affi();
 	return i;
 }
-int find_c(vector<Coal> vec, unsigned int id){
+
+int find_coal_in_vec(vector<Coal> vec, unsigned int id){
 	unsigned int i=0;
 	while(vec[i].get_id()!=id){
 		i++;
@@ -69,12 +69,14 @@ void affi_vec_coal(vector<Coal> res){
 		res[i].affi();
 	}
 }
+
 int random_nb(int N){
 	std::random_device rd;
 	std::mt19937 gen(rd());
 	std::uniform_int_distribution<> dis(1,N);
 	return dis(gen);
 }
+
 void init_vec(vector<unsigned int>& vec,int k){ // initialise le vecteur des possibles 
 	//cout << "initialise" << endl;
 	for(int i=0; i<k;i++){
@@ -103,29 +105,17 @@ int simulate(int N){
 	}
 	return compt+1;
 }
+
 void trouve_test(vector<unsigned int>& vec,vector<Coal>& res,unsigned int& k,unsigned int& nb_gen,unsigned int N) {
 	int coal_a_modifier;
-	int place_coal_a_modifier;
 	int nb_ale;
 	int celui_quon_veut;
-	//cout << "avant nb_al" << endl;
 	nb_ale=random_nb(vec.size())-1;
-	//cout << "apres nb_al" <<endl;
-	//cout << "nombre aleatoire" << nb_ale << endl;
 	coal_a_modifier=vec[nb_ale];
-	//cout << "la position " << nb_ale <<" correspond au coal n°" << coal_a_modifier << endl;
-	//cout<< "avant affi vecteur" << endl;
-	//aff_vec(vec);
-	//cout << "celui qu'on veut " << nb_ale << endl;
-	celui_quon_veut=find_c(res,coal_a_modifier);
-	//cout << "coal a modifier " << coal_a_modifier << "a la base " << nb_ale << endl;
-	//res[celui_quon_veut].affi();
+	celui_quon_veut=find_coal_in_vec(res,coal_a_modifier);
 	res[celui_quon_veut].set_pere(k);
 	res[celui_quon_veut].set_gen(nb_gen);
-	//res[celui_quon_veut].affi();
 	vec.erase(vec.begin()+nb_ale);
-	//aff_vec(vec);
-
 }
 
 void fait_tout(vector<unsigned int>& vec,vector<Coal>& res,unsigned int& k,unsigned int& nb_gen,unsigned int N,unsigned int nb_coal){
@@ -133,13 +123,12 @@ void fait_tout(vector<unsigned int>& vec,vector<Coal>& res,unsigned int& k,unsig
 	for(unsigned int i=0;i<nb_coal;i++){
 		trouve_test(vec,res,k,nb_gen,N);
 	}
-	//k++;
 	vec.push_back(k);
 	k++;
 }
 
 int main(){
-	unsigned int k=4;
+	unsigned int k=100;
 	unsigned int N=k;
 	vector<Coal> res;
 	res.size();
@@ -149,22 +138,10 @@ int main(){
 	for(unsigned int i=0;i<2*k-1;i++){
 		Coal obj(i);
 		res.push_back(obj);
-		//obj.affi();
-			}
-	/*while(vec_possible.size()>=2){
-		cout << "dans le while " << endl;
-	//for(int i=0;i<4;i++){
-		//cout << "taille du vecteur des possibles" << vec_possible.size() << endl;
-		trouve_2suiv(vec_possible,res,k,nb_gen,N);
-		//affi_vec_coal(res);
-
-	}*/
+	}
 	while(vec_possible.size()>=2){
 		fait_tout(vec_possible,res,k,nb_gen,N,2);
 	}
-	//trouve_2suiv(vec_possible,res,k,nb_gen,N);	
-
-	//cout << " le vecteur "<<endl;
 	affi_vec_coal(res);
 
 }
