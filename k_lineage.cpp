@@ -110,10 +110,9 @@ void trouve_test(vector<unsigned int>& vec,vector<Coal>& res,unsigned int& k,uns
 	int celui_quon_veut;
 	nb_ale=random_nb(vec.size()-1);
 	cout << "nombre aleatoire" << nb_ale << endl;
-	place_coal_a_modifier=vec[nb_ale];
-	cout << "le coal n°" << nb_ale <<" se trouve en postion " << place_coal_a_modifier << endl;
+	coal_a_modifier=vec[nb_ale];
+	cout << "la position " << nb_ale <<" correspond au coal n°" << coal_a_modifier << endl;
 	aff_vec(vec);
-	coal_a_modifier=vec[place_coal_a_modifier];
 	cout << "celui qu'on veut " << nb_ale << endl;
 	celui_quon_veut=find_c(res,coal_a_modifier);
 	//cout << "coal a modifier " << coal_a_modifier << "a la base " << nb_ale << endl;
@@ -121,7 +120,7 @@ void trouve_test(vector<unsigned int>& vec,vector<Coal>& res,unsigned int& k,uns
 	res[celui_quon_veut].set_pere(k);
 	res[celui_quon_veut].set_gen(nb_gen);
 	res[celui_quon_veut].affi();
-	vec.erase(vec.begin()+place_coal_a_modifier);
+	vec.erase(vec.begin()+nb_ale);
 	aff_vec(vec);
 
 }
@@ -133,7 +132,8 @@ void fait_tout(vector<unsigned int>& vec,vector<Coal>& res,unsigned int& k,unsig
 	}
 	k++;
 	vec.push_back(k);
-	
+	cout << "affichage du vecteur de coal" << endl;
+	affi_vec_coal(res);
 }
 
 int main(){
@@ -167,7 +167,9 @@ int main(){
 		//affi_vec_coal(res);
 
 	}*/
-	fait_tout(vec_test,res,k,nb_gen,N,2);
+	while(vec_possible.size()>=2){
+		fait_tout(vec_possible,res,k,nb_gen,N,2);
+	}
 	//trouve_2suiv(vec_possible,res,k,nb_gen,N);	
 
 	//cout << " le vecteur "<<endl;
