@@ -78,11 +78,9 @@ int random_nb(int N){
 }
 
 void init_vec(vector<unsigned int>& vec,int k){ // initialise le vecteur des possibles 
-	//cout << "initialise" << endl;
 	for(int i=0; i<k;i++){
 		vec.push_back(i);
 	}
-	//cout << "fin initialise" << endl;
 }
 void aff_vec(vector<unsigned int>& vec){
 	for(unsigned int i=0;i<vec.size();i++){
@@ -106,29 +104,33 @@ int simulate(int N){
 	return compt+1;
 }
 
-void trouve_test(vector<unsigned int>& vec,vector<Coal>& res,unsigned int& k,unsigned int& nb_gen,unsigned int N) {
-	int coal_a_modifier;
-	int nb_ale;
-	int celui_quon_veut;
-	nb_ale=random_nb(vec.size())-1;
-	coal_a_modifier=vec[nb_ale];
-	celui_quon_veut=find_coal_in_vec(res,coal_a_modifier);
-	res[celui_quon_veut].set_pere(k);
-	res[celui_quon_veut].set_gen(nb_gen);
-	vec.erase(vec.begin()+nb_ale);
+void update_coal(vector<unsigned int>& vec,vector<Coal>& res,unsigned int& k,unsigned int& nb_gen,unsigned int N) {
+	int position_in_res;
+	int position_in_vec;
+	int coal_target;
+	
+	position_in_vec=random_nb(vec.size())-1;
+	position_in_res=vec[position_in_vec];
+	coal_target=find_coal_in_vec(res,position_in_res);
+
+
+	res[coal_target].set_pere(k);
+	res[coal_target].set_gen(nb_gen);
+
+	vec.erase(vec.begin()+position_in_vec);
 }
 
-void fait_tout(vector<unsigned int>& vec,vector<Coal>& res,unsigned int& k,unsigned int& nb_gen,unsigned int N,unsigned int nb_coal){
+void find_filiation(vector<unsigned int>& vec,vector<Coal>& res,unsigned int& k,unsigned int& nb_gen,unsigned int N,unsigned int nb_coal){
 	nb_gen+=simulate(N);
 	for(unsigned int i=0;i<nb_coal;i++){
-		trouve_test(vec,res,k,nb_gen,N);
+		update_coal(vec,res,k,nb_gen,N);
 	}
 	vec.push_back(k);
 	k++;
 }
 
 int main(){
-	unsigned int k=100;
+	unsigned int k=10;
 	unsigned int N=k;
 	vector<Coal> res;
 	res.size();
@@ -140,7 +142,7 @@ int main(){
 		res.push_back(obj);
 	}
 	while(vec_possible.size()>=2){
-		fait_tout(vec_possible,res,k,nb_gen,N,2);
+		find_filiation(vec_possible,res,k,nb_gen,N,2);
 	}
 	affi_vec_coal(res);
 
