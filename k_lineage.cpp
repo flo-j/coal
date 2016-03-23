@@ -108,36 +108,34 @@ void trouve_test(vector<unsigned int>& vec,vector<Coal>& res,unsigned int& k,uns
 	int place_coal_a_modifier;
 	int nb_ale;
 	int celui_quon_veut;
-	cout << "avant nb_al" << endl;
+	//cout << "avant nb_al" << endl;
 	nb_ale=random_nb(vec.size())-1;
-	cout << "apres nb_al" <<endl;
+	//cout << "apres nb_al" <<endl;
 	//cout << "nombre aleatoire" << nb_ale << endl;
 	coal_a_modifier=vec[nb_ale];
-	cout << "la position " << nb_ale <<" correspond au coal n°" << coal_a_modifier << endl;
-	cout<< "avant affi vecteur" << endl;
-	aff_vec(vec);
+	//cout << "la position " << nb_ale <<" correspond au coal n°" << coal_a_modifier << endl;
+	//cout<< "avant affi vecteur" << endl;
+	//aff_vec(vec);
 	//cout << "celui qu'on veut " << nb_ale << endl;
 	celui_quon_veut=find_c(res,coal_a_modifier);
 	//cout << "coal a modifier " << coal_a_modifier << "a la base " << nb_ale << endl;
-	res[celui_quon_veut].affi();
+	//res[celui_quon_veut].affi();
 	res[celui_quon_veut].set_pere(k);
 	res[celui_quon_veut].set_gen(nb_gen);
-	res[celui_quon_veut].affi();
+	//res[celui_quon_veut].affi();
 	vec.erase(vec.begin()+nb_ale);
-	aff_vec(vec);
+	//aff_vec(vec);
 
 }
 
 void fait_tout(vector<unsigned int>& vec,vector<Coal>& res,unsigned int& k,unsigned int& nb_gen,unsigned int N,unsigned int nb_coal){
 	nb_gen+=simulate(N);
 	for(unsigned int i=0;i<nb_coal;i++){
-		cout << "boucle for, dans fait_tout" << endl;
 		trouve_test(vec,res,k,nb_gen,N);
 	}
-	k++;
+	//k++;
 	vec.push_back(k);
-	cout << "affichage du vecteur de coal" << endl;
-	affi_vec_coal(res);
+	k++;
 }
 
 int main(){
@@ -148,16 +146,6 @@ int main(){
 	vector<unsigned int> vec_possible;
 	init_vec(vec_possible,k);
 	unsigned int nb_gen=0;
-	vector<unsigned int> vec_test;
-	int var_test;
-	vec_test.push_back(3);
-	vec_test.push_back(0);
-	vec_test.push_back(1);
-	vec_test.push_back(2);
-	aff_vec(vec_test);
-	var_test=find_coal(vec_test,1);
-	cout << "var test : " << var_test << endl;
-	
 	for(unsigned int i=0;i<2*k-1;i++){
 		Coal obj(i);
 		res.push_back(obj);
@@ -177,6 +165,6 @@ int main(){
 	//trouve_2suiv(vec_possible,res,k,nb_gen,N);	
 
 	//cout << " le vecteur "<<endl;
-	//affi_vec_coal(res);
+	affi_vec_coal(res);
 
 }
