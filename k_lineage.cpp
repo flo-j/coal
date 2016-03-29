@@ -128,7 +128,7 @@ void find_filiation(vector<unsigned int>& vec,vector<Coal>& res,unsigned int& k,
 	vec.push_back(k);
 	k++;
 }
-
+.
 int main(){
 	unsigned int k=10;
 	unsigned int N=k;
@@ -145,5 +145,4 @@ int main(){
 		find_filiation(vec_possible,res,k,nb_gen,N,2);
 	}
 	affi_vec_coal(res);
-
 }
