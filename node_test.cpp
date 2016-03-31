@@ -13,22 +13,15 @@ class Node{
 //public:
 	Node* pParent; // a terme une paire? vu que deux parents.. mais louche.. 
 	vector<Node*> m_children; // vecteur de reference sur les enfants : evite la copie.. 
-	string m_status; // pour les parcours!
 	int m_data; // attention à terme ça devrait etre autre chose qu'un int.. voir comment utiliser les using !
 
 
 public:
-	Node(Node* pParent=nullptr, string m_status="non atteint"){} // constructeur par defaut 
+	Node(Node* pParent=nullptr){} // constructeur par defaut 
 	Node(int data){ // si on y ajoute des données
 		pParent=nullptr;
-		m_status="non atteint";
 		m_data=data;
 	} 
-
-	void change_status(string status){
-		m_status=status;
-	}
-
 	void AddAChild(Node &node1){
 		m_children.push_back(&node1);
 	}
@@ -46,17 +39,13 @@ public:
 		Node* voisin;
 		queue<Node*> st;
 		st.push(this);
-		this->m_status="atteint";
 		while(!st.empty()){
 			r=st.front();
 			st.pop();
 			cout << r->m_data << " " ;
 			for(unsigned int i=0;i<r->m_children.size();i++){
 				voisin=r->m_children[i];
-				if(voisin->m_status=="non atteint"){
-					st.push(voisin);
-					voisin->m_status="atteint";
-				}
+				st.push(voisin);
 			}
 		}
 	}
@@ -102,9 +91,7 @@ int main(){
 	node2.print_node();
 	node3.print_node();
 	node4.print_node();*/
-	//cout << node0.m_status << endl;
 	node4.Dfs();
-	//cout << node0.m_status << endl;
 
 	//construit un arbre avec node0 et node1 qui ont pour pere node2
 	// node2 et node3 qui ont pour pere node4
