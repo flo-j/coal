@@ -1,5 +1,5 @@
 /* florence jornod
-aucune garantie !
+aucune garantie ! (je vois....)
 */
 
 
@@ -15,7 +15,7 @@ class Node{
 private:
 	bool m_status=false; // si le noeud est plein ou vide
 	int m_position=-1; // position du noeud dans le vecteur
-	unsigned int m_parent; // la position du parent
+	unsigned int m_parent=-1; // la position du parent
 	vector<int> m_children; // la position des enfants
 	// un truc avec l'interieur du noeud.. genre les info des lignées
 public:
@@ -25,7 +25,7 @@ public:
 		m_position=position;
 		m_parent=0;
 	}*/
-	void aff_vec(vector<int>& vec){
+	void aff_vec(vector<int>& vec){ // surcharge opérateur <<
 	for(int i=0;i<vec.size();i++){
 		cout << vec[i] << "\t";
 	}
@@ -44,13 +44,16 @@ public:
 	}
 	void change_status(){
 		if(m_status){
-			m_status=false;
+			m_status=false; // m_status = !mstatus;
 		}else{
 			m_status=true;
 		}
 	}
 	int get_pos(){
 		return m_position;
+	}
+	int get_parent(){
+		return m_parent;
 	}
 	void set_parent(unsigned int parent){
 		m_parent=parent;
@@ -59,7 +62,7 @@ public:
 		m_position=pos;
 	}
 
-	void addAChild(int child_pos){
+	void addAChild(int child_pos){ // addChild(Tree child)
 		cout << "taille du vecteur enfant : " << m_children.size() << endl;
 		m_children.push_back(child_pos);
 		cout << "taille du vecteur enfant : " << m_children.size() << endl;
@@ -68,11 +71,18 @@ public:
 	void modif_node(unsigned int pos){
 		set_pos(pos);
 		change_status(); // attention si on le fait plusieurs fois ça va poser un pb
-
+		set_parent(pos);
 	}
 	//void create_new_node()
-};
 
+};
+void aff_racine(vector<Node> res){
+	unsigned int i=0;
+	while(res[i].get_pos()!=res[i].get_parent()){
+		i++;
+	}	
+		cout << "le noeud " << res[i].get_pos() << " est la racine de l'arbre " << endl;
+	}
 int main(){
 	unsigned int k=4;
 	vector<Node> res(2*k-1);
@@ -82,6 +92,7 @@ int main(){
 		i.push(j);
 	}
 	cout << res[i.top()].get_pos() << endl;
+	// CREATION D'UN ARBRE À LA MAIN.. C'EST MOCHE ..
 	unsigned int pos=i.top();
 	res[pos].modif_node(pos);
 	//res[pos].aff_node();
@@ -110,9 +121,11 @@ int main(){
 	res[5].set_parent(i.top());
 	res[i.top()].addAChild(3);
 	res[i.top()].addAChild(5);
+
 	for(int j=0; j<res.size();j++){
 		res[j].aff_node();
 	}
+	aff_racine(res);
 
 
 	//cout << res[pos].get_pos() << endl;
