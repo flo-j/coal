@@ -6,9 +6,11 @@
 #include <vector>
 #include <algorithm>
 #include <stack>
+#include <iterator>
+#include <queue>
 using namespace std;
 class Node{
-public:
+//public:
 	Node* pParent; // a terme une paire? vu que deux parents.. mais louche.. 
 	vector<Node*> m_children; // vecteur de reference sur les enfants : evite la copie.. 
 	string m_status; // pour les parcours!
@@ -40,15 +42,22 @@ public:
 	}
 
 	void Dfs(){
-		Node*=r;
-		Node*=voisin;
-		stack<Node*> st;
+		Node* r;
+		Node* voisin;
+		queue<Node*> st;
 		st.push(this);
 		this->m_status="atteint";
 		while(!st.empty()){
-			r=st.top();
+			r=st.front();
 			st.pop();
-			
+			cout << r->m_data << " " ;
+			for(unsigned int i=0;i<r->m_children.size();i++){
+				voisin=r->m_children[i];
+				if(voisin->m_status=="non atteint"){
+					st.push(voisin);
+					voisin->m_status="atteint";
+				}
+			}
 		}
 	}
 
@@ -87,15 +96,15 @@ int main(){
 
 	node2.hasForChildren(node0,node1);
 	node4.hasForChildren(node2,node3);
-	node0.print_node();
+	/*node0.print_node();
 	cout <<" adresse node0 :" << &node0 << endl;
 	node1.print_node();
 	node2.print_node();
 	node3.print_node();
-	node4.print_node();
-	cout << node0.m_status << endl;
-	node0.Dfs();
-	cout << node0.m_status << endl;
+	node4.print_node();*/
+	//cout << node0.m_status << endl;
+	node4.Dfs();
+	//cout << node0.m_status << endl;
 
 	//construit un arbre avec node0 et node1 qui ont pour pere node2
 	// node2 et node3 qui ont pour pere node4
