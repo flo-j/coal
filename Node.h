@@ -13,7 +13,7 @@ class Visitor;
 class Node{
 
 //private:
-public:
+private:
 	Node* pParent = nullptr; 
 	std::vector<Node*> m_children; // vecteur de reference sur les enfants : evite la copie.. 
 	// std::reference_wrapper
@@ -29,6 +29,15 @@ public:
 		m_data=data;
 	} 
 
+	Node* get_parent(){
+		return pParent;
+	}
+	std::vector<Node*> get_children(){
+		return m_children;
+	}
+	int get_data(){
+		return m_data;
+	}
 	void AddAChild(Node* node1){
 		m_children.push_back(node1);
 	}
