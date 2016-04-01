@@ -28,12 +28,15 @@ using namespace std;
 		}
 		return v;
 	}
-
-
+void aff_vec(vector<int> vec){ // surcharge opérateur <<
+	for(int i=0;i<vec.size();i++){
+		cout << vec[i] << "\t";
+	}
+}
 int main(){
 	// par defaut un noeud est une racine => pointeur null pour le pere
 	// dans les parentheses : on a la valeur contenu par le noeud
-	/*Node node0(0);
+	Node node0(0);
 	Node node1(1);
 	Node node2(3);
 	Node node3(2);
@@ -50,9 +53,10 @@ int main(){
 	node1.print_node();
 	node2.print_node();
 	node3.print_node();
-	node4.print_node();*/
-	//v=node4.Dfs();
-
+	node4.print_node();
+	v=node4.Dfs(v);
+	v.get_vect();
+	aff_vec(v.get_vect());
 	//construit un arbre avec node0 et node1 qui ont pour pere node2
 	// node2 et node3 qui ont pour pere node4
 
