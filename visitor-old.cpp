@@ -8,6 +8,6 @@
 #include <iterator>
 #include <queue>
 void Visitor::visit( Node* node){ // const Node& node
-		res.push_back(node->m_data);
+		res.push_back(node->get_data());
 }
 
