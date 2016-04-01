@@ -8,6 +8,8 @@
 #include <stack>
 #include <iterator>
 #include <queue>
+#include <cassert>
+
 using namespace std;
 #include "visitor.h"
 
@@ -29,7 +31,8 @@ using namespace std;
 		return v;
 	}
 void aff_vec(vector<int> vec){ // surcharge opérateur <<
-	for(int i=0;i<vec.size();i++){
+	cout << endl;
+	for(unsigned int i=0;i<vec.size();i++){
 		cout << vec[i] << "\t";
 	}
 }
@@ -42,21 +45,22 @@ int main(){
 	Node node3(2);
 	Node node4(4);
 	Visitor v;
-	
+	vector<int> test;
+	test.push_back(4);
+	test.push_back(3);
+	test.push_back(2);
+	test.push_back(0);
+	test.push_back(1);
 	//node2=node0.mergeWith(node1);
 	//node4=node2.mergeWith(node3);
 
 	node2.hasForChildren(node0,node1);
 	node4.hasForChildren(node2,node3);
-	node0.print_node();
-	cout <<" adresse node0 :" << &node0 << endl;
-	node1.print_node();
-	node2.print_node();
-	node3.print_node();
-	node4.print_node();
 	v=node4.Dfs(v);
-	v.get_vect();
 	aff_vec(v.get_vect());
+	aff_vec(test);
+	assert(v.get_vect()==test);
+
 	//construit un arbre avec node0 et node1 qui ont pour pere node2
 	// node2 et node3 qui ont pour pere node4
 
