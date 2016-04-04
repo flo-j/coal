@@ -8,7 +8,7 @@
 #include <stack>
 #include <iterator>
 #include <queue>
-#include <cassert>
+#include <cassert> // include "assert.h"
 
 #include "visitor.h"
 
@@ -20,17 +20,18 @@
 
 		while(!waiting.empty()){
 
-			auto current_Node = waiting.front();
+			Node* current = waiting.front();
 			waiting.pop();
-			v.visit(current_Node);
+			v.visit(current);
 
-			for(auto child : current_Node->m_children){
+			for(auto child : current->m_children){
 				next = child;
 				waiting.push(next);
 			}
 		}
 		return v;
 	}
+
 	Visitor Node::Bfs(Visitor& v) const{
 		
 		const Node* next;
@@ -54,8 +55,8 @@
 	// XXX
 void aff_vec(std::vector<int> vec) { // surcharge opérateur <<
 
-	for(unsigned int i=0;i<vec.size();i++){
-		std::cout << vec[i] << "\t";
+	for(auto v : vec){
+		std::cout << v << " ";
 	}
 	std::cout << std::endl;
 }
@@ -88,6 +89,5 @@ int main(){
 	// test 
 	aff_vec(v.get_vect());
 	aff_vec(test);
-	
 	assert(v.get_vect()==test);
 }

@@ -28,12 +28,15 @@ public:
 		pParent=nullptr;
 		m_data=data;
 	} 
+
 	Node* get_parent() const{
 		return pParent;
 	}
+
 	std::vector<Node*> get_children() const{
 		return m_children;
 	}
+	
 	int get_data() const{
 		return m_data;
 	}
@@ -50,16 +53,19 @@ public:
 		AddAChild(&node2);
 	}
 
-	bool hasChildren(){
+	bool hasChildren() const{
 		return !m_children.empty();
 	}
-	void RemoveNode(){
-		// tant qu'il a des fils
-		while(this.hasChildren()){
-			this.get_children()[1].RemoveNode();
+
+	bool hasParent() const{
+		if(pParent){
+			return true;
+		}else{
+			return false;
 		}
-		delete this;
 	}
+
+
 
 	Visitor Bfs(Visitor& v) const ;
 	Visitor Bfs(Visitor& v) ;
