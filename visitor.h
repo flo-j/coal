@@ -15,7 +15,7 @@ class Visitor{
 
 public:
 
-	void visit(Node* node);
+	void visit(const Node* node);
 
 	std::vector<int> get_vect()  {
 		return res;
