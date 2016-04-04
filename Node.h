@@ -49,6 +49,18 @@ public:
 		AddAChild(&node1);
 		AddAChild(&node2);
 	}
+
+	bool hasChildren(){
+		return !m_children.empty();
+	}
+	void RemoveNode(){
+		// tant qu'il a des fils
+		while(this.hasChildren()){
+			this.get_children()[1].RemoveNode();
+		}
+		delete this;
+	}
+
 	Visitor Bfs(Visitor& v) const ;
 	Visitor Bfs(Visitor& v) ;
 
@@ -70,7 +82,7 @@ public:
 		for(unsigned int i=0; i<m_children.size();i++){
 			std::cout << m_children[i]->m_data << " ";
 		}
-		
+
 		std::cout << std::endl;
 	}
 };

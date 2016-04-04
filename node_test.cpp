@@ -13,6 +13,7 @@
 #include "visitor.h"
 
 	Visitor Node::Bfs(Visitor& v){
+
 		Node* next;
 		std::queue<Node*> waiting;
 		waiting.push(this);
@@ -31,6 +32,7 @@
 		return v;
 	}
 	Visitor Node::Bfs(Visitor& v) const{
+		
 		const Node* next;
 		std::queue<const Node*> waiting;
 		waiting.push(this);
@@ -48,9 +50,10 @@
 		}
 		return v;
 	}
+
 	// XXX
 void aff_vec(std::vector<int> vec) { // surcharge opérateur <<
-	
+
 	for(unsigned int i=0;i<vec.size();i++){
 		std::cout << vec[i] << "\t";
 	}
@@ -85,5 +88,6 @@ int main(){
 	// test 
 	aff_vec(v.get_vect());
 	aff_vec(test);
+	
 	assert(v.get_vect()==test);
 }
