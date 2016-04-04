@@ -22,15 +22,19 @@ private:
 
 public:
 
-	Node(){} // constructeur par defaut 
+	Node(){} // constructeur par defaut œ
 
 	Node(int data){ // si on y ajoute des données
 		pParent=nullptr;
 		m_data=data;
 	} 
 
-	Node* get_parent() const{
-		return pParent;
+	Node get_parent() const{
+		if(hasParent()){
+			return *pParent;
+		}else{
+			throw std::string("no existing parent, please check current instance of Node has parent.");
+		}
 	}
 
 	std::vector<Node*> get_children() const{
@@ -41,16 +45,16 @@ public:
 		return m_data;
 	}
 
-	void AddAChild(Node* node1){
-		m_children.push_back(node1);
+	void AddAChild(Node& node1){
+		m_children.push_back(&node1);
 	}
 
 	void AddChildren(Node &node1, Node &node2){
 		//
 		node1.pParent=this; // normalement this correspond au pointeur qui pointe sur le pere ..
 		node2.pParent=this;
-		AddAChild(&node1);
-		AddAChild(&node2);
+		AddAChild(node1);
+		AddAChild(node2);
 	}
 
 	bool hasChildren() const{

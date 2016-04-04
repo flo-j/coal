@@ -63,6 +63,8 @@ void aff_vec(std::vector<int> vec) { // surcharge opérateur <<
 
 
 int main(){
+	using std::cout;
+	using std::endl;
 	// par defaut un noeud est une racine => pointeur null pour le pere
 	// dans les parentheses : on a la valeur contenu par le noeud
 	Node node0(0);
@@ -90,4 +92,12 @@ int main(){
 	aff_vec(v.get_vect());
 	aff_vec(test);
 	assert(v.get_vect()==test);
+	node4.print_node();
+	try{
+		node4.get_parent();
+	}
+	catch(std::string e){
+		cout << e << endl;
+	}
+	cout << "douze" << endl;
 }
