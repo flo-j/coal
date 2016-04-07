@@ -28,17 +28,18 @@ vector<Node> simulate(Demography& demo){
 
 	}
 }
-bool demo_validy(){
+bool demo_validity(){
 	// pour chaque coord de la genetique
 	// si elle n'existe pas dans la demo ou que pas assez de frelon (= allele)
 	// return false
 	//fdp
 	// return true
+	//VERIFIER LE TEMPS AUSSI ! ( MEME AVANT!!)
 }
 
 // FAUT IL DISTINGUER ROOTS ET UN TRUC QUI A ROOTS+ POSITION
 vector<Node> instantiates_roots(){ // retourne le vecteur des racines possibles pour la coalescence
-	if(!demo_validy()){} // erreur genre try catch mais voir comment ça marche..
+	if(!demo_validity()){} // erreur genre try catch mais voir comment ça marche..
 	collection < lieu; vector<Node>> roots; // => contient pour chaque position les racines disponibles | on y passe les node par reference, voir si ça peut marcher 
 	for(auto& pos : gen.position){ // pour tous les positions disponibles via le jeu de données genet
 		roots.lieu.add(lieu); // PAS UN ADD MAIS POUR VISUALISER QU'ON AJOUTE LE LIEU AU VECTEUR !!
