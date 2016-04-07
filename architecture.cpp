@@ -2,22 +2,24 @@
 
 
 vector<Node> simulate(Demography& demo){
-	collection<lieu ; vector<Node&> > availableSpace; // les lieux et qui il y a 
+	collection<lieu ; vector<Node&> > availableSpace; // les lieux et qui il y a ESTCE QUE CA SERAIT M_ROOTS ?? 
+	
 	// initialisation A METTRE DABS inistantiates_roots() 
-	for(auto & demo_case : demo.space){ // demo.space étant les cases pleines à la fin de la demographie (ou les cases où il y a des alleles au niveau genetique)
+	/*for(auto & demo_case : demo.space){ // demo.space étant les cases pleines à la fin de la demographie (ou les cases où il y a des alleles au niveau genetique)
 		pop_size=N(demo_case,t=0); // pour la case en cours on trouve sa contenance au temps 0 (cad le temps qui nous interesse et qui sera le debut de la coalescence)
 		availableSpace.add(demo_case,pop_size); // dans chaque case on a le nombre de pers et sa case
 		// indetermination : qui sait où sont les noeud..
+		
 		for(int i=0; i < pop_size; i++){
 			new Node; // creation d'un nouveau noeud
 			rootHolder.add(Node);
 			availableSpace.vec.add(Node&);
 		}
-	}
+	}*/
 
+		// dans ce while surement qu'il faut plutot mettre directement la deuxieme condition d'arret que de mettre 
 	while(m_roots.size()!=1 || !m_demography.end_time()){ // m_roots est un attribut de la class Coalescence et m_demography.end_time() verifie si le temps doit s'arreter 
-		 // les espaces dans lesquels je dispatche des individus
-
+		 // on dispatche les individus (on modifie roots)
 		
 
 
@@ -28,7 +30,7 @@ vector<Node> simulate(Demography& demo){
 
 	}
 }
-bool demo_validity(){
+bool demo_validity() const{
 	// pour chaque coord de la genetique
 	// si elle n'existe pas dans la demo ou que pas assez de frelon (= allele)
 	// return false
@@ -56,9 +58,9 @@ vector<Node> instantiates_roots(){ // retourne le vecteur des racines possibles 
 
 class CoalescenceSimulator{
 private:
-		m_dataSet
-		m_demography
-		m_roots
+	m_dataSet
+	m_demography
+	collection < lieu; vector<Node>> m_roots;
 public:
 	Simulator(Genetics genet, Demography demo) : m_dataSet(genet), m_demography(demo), m_roots(inistantiates_roots()/*evite d'avoir le bordel en public */){
 		/*if(...)
