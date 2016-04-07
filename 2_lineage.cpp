@@ -68,6 +68,7 @@ int main(){
 	start2 = std::chrono::system_clock::now();
 	write_file(tcoal,N,fileName);
 	
+	// elapsed time 
 	end2 = std::chrono::system_clock::now();
 	int elapsed_seconds = std::chrono::duration_cast<std::chrono::seconds>
                              (end-start).count();
