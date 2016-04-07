@@ -15,7 +15,7 @@ vector<Node> simulate(Demography& demo){
 		}
 	}
 
-	while(rootHolder.size()!=1 || !demo.end_time()){ // rootholder est un attribut de la class Coalescence et demo.end_time() parcours les temps 
+	while(m_roots.size()!=1 || !m_demography.end_time()){ // m_roots est un attribut de la class Coalescence et m_demography.end_time() verifie si le temps doit s'arreter 
 		 // les espaces dans lesquels je dispatche des individus
 
 		
@@ -36,11 +36,19 @@ bool demo_validy(){
 	// return true
 }
 
-vector<Nodes> instantiates_roots(){ // retourne le vecteur des racines possibles pour la coalescence
+// FAUT IL DISTINGUER ROOTS ET UN TRUC QUI A ROOTS+ POSITION
+vector<Node> instantiates_roots(){ // retourne le vecteur des racines possibles pour la coalescence
 	if(!demo_validy()){} // erreur genre try catch mais voir comment ça marche..
-	collection < lieu; vector<Node>> ; // on y passe les node par reference, voir si ça peut marcher
-	
-
+	collection < lieu; vector<Node>> roots; // => contient pour chaque position les racines disponibles | on y passe les node par reference, voir si ça peut marcher 
+	for(auto& pos : gen.position){ // pour tous les positions disponibles via le jeu de données genet
+		roots.lieu.add(lieu); // PAS UN ADD MAIS POUR VISUALISER QU'ON AJOUTE LE LIEU AU VECTEUR !!
+		//auto pop_size=gen.position.NbInd; // le nombre de gens pour chaque case A METTRE LIMITE DIRECT DANS LA BOUCLE SUIVANTE!!
+		for(auto ind : gen.position.NbInd){
+			new Node; // creation d'un nouveau noeud
+			roots.vec.add(Node&); // au passage ne pas oublier de l'ajouter dans le nodeholder (limite ca doit se faire avec le new ..)	
+		}
+	}
+	return roots;
 }
 
 
@@ -50,7 +58,6 @@ private:
 		m_dataSet
 		m_demography
 		m_roots
-
 public:
 	Simulator(Genetics genet, Demography demo) : m_dataSet(genet), m_demography(demo), m_roots(inistantiates_roots()/*evite d'avoir le bordel en public */){
 		/*if(...)
@@ -58,8 +65,6 @@ public:
 
 		 //roots_type rootHodler = ... */
 	}
-
-}
 
 main :
 Demography demo = DemoSimul.simul()
@@ -79,3 +84,7 @@ Coalescent coal2 = simulator.simul(data, demo2)
 // Troisieme solution
 Coalescent coal1 = Simulator::simul(data, demo1)
 Coalescent coal2 = Simulator::simul(data, demo2)
+
+
+}
+
