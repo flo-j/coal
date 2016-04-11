@@ -46,6 +46,15 @@ vector<Node> simulate(Demography& demo){
 
 	}
 }
+bool demo_validity() const{ 
+	// pour chaque coord de la genetique
+	// si elle n'existe pas dans la demo ou que pas assez de frelon (= allele) dispo
+	// return false
+	//fdp
+	// return true
+	//VERIFIER LE TEMPS AUSSI ! ( MEME AVANT!!) => si qu'un seul temps mm pas la peine d'aller plus loin
+	// le fdp est evidemment un "fin du pour" et pas le code qui t'insulte ... >< 
+}
 
 
 
