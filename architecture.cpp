@@ -21,9 +21,31 @@ vector<Node> simulate(Demography& demo){
 		// dans ce while surement qu'il faut plutot mettre directement la deuxieme condition d'arret que de mettre 
 	while(m_roots.size()!=1 || !m_demography.end_time()){ // m_roots est un attribut de la class Coalescence et m_demography.end_time() verifie si le temps doit s'arreter 
 		// on dispatche les individus (on modifie roots)
-		//pour chaque case de roots 
-			//pour chaque ind
-				//ind.proposeMove();
+		
+		//pour chaque case de roots => on itere sur les clés .. COMMENT ON FAIT AAAAAH
+			map<coord,int> pop_flux=demo.pop_flux("AAAAAA c'est quoi les argu ??!"); // on recupere une map avec en clé les coord et en valeurs le nb d'ind 
+			vector<int> flux;
+			vector<COORD> coord; // type à definir ...
+			for(std::map<coord,int>::iterator it=pop_flux.begin(); it!=pop_flux.end(); ++it){
+        		coord.push_back(it->first);
+        		flux.push_back(it->second);
+    		} 
+    		std::pair <std::multimap<coord,int>::iterator, std::multimap<coord,int>::iterator> trouver_un_nom; // des itetor pour iterer sur m_roots
+    		trouver_un_nom = m_roots.equal_range(coord); 
+    		multimap<coord,Node> roots_temp; // roots en construction 
+    		std::random_device rd;
+   			std::mt19937 gen(rd());
+    		std::discrete_distribution <int> d(flux.begin(),flux.end());
+			//pour chaque ind de roots dans la case 
+    		for (std::multimap<coord,int>::iterator it=trouver_un_nom.first; it!=trouver_un_nom.second; ++it){
+    			auto x=d(gen); // x correspond à la coordonné d'arrivée
+    			// prendre en compte le cas où il n'y a qu'une case...
+    			roots_temp.insert(make_pair(coord[x],it->second)); 
+    		}
+		}
+		m_roots.clear();
+		m_roots=roots_temp;
+		roots_temp.clear();
 			//fdp
 		//fdp
 		// ici il faut faire écrire les individus dans un nouveau vecteur comme il serait dans m_roots et ensuite il faudra remplacer l'ancien de m_root par celui la
@@ -80,7 +102,7 @@ class CoalescenceSimulator{
 private:
 	m_dataSet
 	m_demography
-	collection < lieu; vector<Node>> m_roots;
+	collection < lieu; vector<Node>> m_roots; // surement une multimap <lieu, node>
 public:
 	Simulator(Genetics genet, Demography demo) : m_dataSet(genet), m_demography(demo), m_roots(inistantiates_roots()/*evite d'avoir le bordel en public */){
 		/*if(...)
