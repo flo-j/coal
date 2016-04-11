@@ -16,6 +16,7 @@ vector<Node> simulate(Demography& demo){
 			availableSpace.vec.add(Node&);
 		}
 	}*/
+		// UN DES SOUCIS DE CE WHILE, C'EST LE RISQUE DE BOUCLE INFINI SI DEUX TRUCS TRES LOIN DANS LESPACE.. ENFIN PAS INFINI DANS LE SENS INFINI MAIS INCOMPATIBLE AVEC UNE REALITÉ
 
 		// dans ce while surement qu'il faut plutot mettre directement la deuxieme condition d'arret que de mettre 
 	while(m_roots.size()!=1 || !m_demography.end_time()){ // m_roots est un attribut de la class Coalescence et m_demography.end_time() verifie si le temps doit s'arreter 
