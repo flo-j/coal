@@ -1,7 +1,5 @@
 // architecture (= algorithme) de la coalescence 
 
-
-
 vector<Node> simulate(Demography& demo){
 	collection<lieu ; vector<Node&> > availableSpace; // les lieux et qui il y a ESTCE QUE CA SERAIT M_ROOTS ?? 
 	
@@ -48,15 +46,7 @@ vector<Node> simulate(Demography& demo){
 
 	}
 }
-bool demo_validity() const{ 
-	// pour chaque coord de la genetique
-	// si elle n'existe pas dans la demo ou que pas assez de frelon (= allele) dispo
-	// return false
-	//fdp
-	// return true
-	//VERIFIER LE TEMPS AUSSI ! ( MEME AVANT!!) => si qu'un seul temps mm pas la peine d'aller plus loin
-	// le fdp est evidemment un "fin du pour" et pas le code qui t'insulte ... >< 
-}
+
 
 
 // FAUT IL DISTINGUER ROOTS ET UN TRUC QUI A ROOTS+ POSITION
