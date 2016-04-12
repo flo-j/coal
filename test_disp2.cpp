@@ -23,7 +23,8 @@ int main(){
 	m_roots[1].push_back(3);
 	m_roots[1].push_back(4);
 	m_roots[1].push_back(5);
-	
+
+	std::cout << m_roots.size() << std::endl;	
 	// Isolating the key coords and the flux values. Caution : indices CAN NOT change
 	std::vector<nb_ind_type> flux;
 	std::vector<coord_type> coords;
