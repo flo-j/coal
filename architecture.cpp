@@ -30,6 +30,7 @@ vector<Node> simulate(Demography& demo){
         		coord.push_back(it->first);
         		flux.push_back(it->second);
     		} 
+    		
     		std::pair <std::multimap<coord,int>::iterator, std::multimap<coord,int>::iterator> trouver_un_nom; // des itetor pour iterer sur m_roots
     		trouver_un_nom = m_roots.equal_range(coord); 
     		
