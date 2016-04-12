@@ -21,7 +21,7 @@ vector<Node> simulate(Demography& demo){
 		// dans ce while surement qu'il faut plutot mettre directement la deuxieme condition d'arret que de mettre 
 	while(m_roots.size()!=1 || !m_demography.end_time()){ // m_roots est un attribut de la class Coalescence et m_demography.end_time() verifie si le temps doit s'arreter 
 		// on dispatche les individus (on modifie roots)
-		
+		multimap<coord,Node> roots_temp; // roots en construction 
 		//pour chaque case de roots => on itere sur les clés .. COMMENT ON FAIT AAAAAH
 			map<coord,int> pop_flux=demo.pop_flux("AAAAAA c'est quoi les argu ??!"); // on recupere une map avec en clé les coord et en valeurs le nb d'ind 
 			vector<int> flux;
@@ -32,7 +32,7 @@ vector<Node> simulate(Demography& demo){
     		} 
     		std::pair <std::multimap<coord,int>::iterator, std::multimap<coord,int>::iterator> trouver_un_nom; // des itetor pour iterer sur m_roots
     		trouver_un_nom = m_roots.equal_range(coord); 
-    		multimap<coord,Node> roots_temp; // roots en construction 
+    		
     		std::random_device rd;
    			std::mt19937 gen(rd());
     		std::discrete_distribution <int> d(flux.begin(),flux.end());
