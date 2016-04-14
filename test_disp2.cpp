@@ -68,17 +68,14 @@ int main(){
 	//std::vector<coord_type> coords;
 	
 
-	std::cout << m_roots.size() <<"\n" << m_roots.begin()->second.size() << "\n";
+	
 	int tcoal=0;
-	while(!(m_roots.size()==1 && m_roots.begin()->second.size()==1)){ // attention || et pas && 
+	while(!(m_roots.size()==1 && m_roots.begin()->second.size()==1)){ 
 		
-		std::cout << " m_roots debut  \n" ;
-		aff_map_roots(m_roots);
 		// Isolating the key coords and the flux values. Caution : indices CAN NOT change
 		std::vector<nb_ind_type> flux;
 		std::vector<coord_type> coords;
 		for( auto i_flux = pop_flux.begin(); i_flux != pop_flux.end(); ++i_flux){
-				std::cout << "coord : " << i_flux->first << " nb_ind : " << i_flux->second << std::endl;
 				coords.push_back(i_flux->first);
 	        	flux.push_back(i_flux->second);
 	    }
@@ -88,7 +85,6 @@ int main(){
 
 		// Iterate over couples demes/lineages
 		for(auto it = m_roots.begin(); it != m_roots.end(); ++it){
-			std::cout << it->first << "\n" ;
 			// appel de la fonction pop_flux;
 			// XXX; A REMETTRE ICI! CAR A TERME POP_FLUX SERA DEFINI ICI AUSSI!!
 			/*for( auto it2=pop_flux.begin(); it2!=pop_flux.end();++it2){
@@ -104,61 +100,36 @@ int main(){
 	    	for(auto lineage : it->second){
 	    		unsigned int arrival_ID = dist(gen);
 	    		coord_type arrival = coords[arrival_ID];
-	    		//std::cout << lineage << "\t" ;
-	    		//std::cout << "arrival " << arrival << "arrival coordinates" << arrival << std::endl;
 	    		roots_temp[arrival].push_back(lineage);
 	    	}
-
-	    	std::cout <<"\n\n" << std::endl;
 		}
 	
 		m_roots.clear();
 		m_roots=roots_temp;
-		aff_map_roots(m_roots);
-//(auto it = roots.begin(); it != roots.end(); ++it
-		std::cout <<"\n\n" << std::endl;
 		for(auto it = m_roots.begin(); it != m_roots.end(); ++it){ // pour tous les lieux de m_roots
 			//on recupere la taille de pop
 			nb_ind_type N=12;
 
 			std::map<unsigned int,std::vector<lineage_type>> temp;
 			for(auto root : it->second){
-				//std::cout<< root << "\t";
 				int random=random_nb(N);
 				temp[random].push_back(root);
 			}
-			aff_map_roots(temp);
 
 			for(auto it2=temp.begin();it2!=temp.end();++it2){
-				std::cout << it2->first;
 				if(it2->second.size()>1){
 					for(auto indi : it2->second){
-						auto test = std::find(it->second.begin(),it->second.end(),indi);
-						std::cout << " ce que retourne find : " << *test << std::endl;
 						auto pos=std::distance(it->second.begin(),std::find(it->second.begin(),it->second.end(),indi));
-						
-						std::cout << "position dans roots n°" << pos ;
-						std::cout << "\t individu n° " << indi;
-						std::cout << std::endl;
 						it->second.erase(it->second.begin()+pos);
 
 					}
 					it->second.push_back(ind);
 					ind++;
-					aff_map_roots(m_roots);
+					
 				}
-				std::cout << std::endl;
 			}
 		}
-		std::cout << "\n" ;
 
-		/*for(auto it = roots_temp.begin(); it != roots_temp.end(); ++it){
-			std::cout <<"coord n° " << it->first << "\t";
-			for(auto root : it->second){
-				std::cout << root << "\t";
-			}
-			std::cout << std::endl;
-		}*/
 		++tcoal;
 	}
 	std::cout << "bien joué ta coal est terminée !" << std::endl;
