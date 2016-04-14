@@ -1,6 +1,7 @@
 #include <iostream>
 #include <map>
 #include <random>
+#include <algorithm>
 // version avec une map de vecteur 
 using coord_type = unsigned int;
 using nb_ind_type = unsigned int;
@@ -68,7 +69,7 @@ int main(){
 	
 
 	std::cout << m_roots.size() <<"\n" << m_roots.begin()->second.size() << "\n";
-
+	int tcoal=0;
 	while(!(m_roots.size()==1 && m_roots.begin()->second.size()==1)){ // attention || et pas && 
 		
 		std::cout << " m_roots debut  \n" ;
@@ -103,8 +104,8 @@ int main(){
 	    	for(auto lineage : it->second){
 	    		unsigned int arrival_ID = dist(gen);
 	    		coord_type arrival = coords[arrival_ID];
-	    		std::cout << lineage << "\t" ;
-	    		std::cout << "arrival " << arrival << "arrival coordinates" << arrival << std::endl;
+	    		//std::cout << lineage << "\t" ;
+	    		//std::cout << "arrival " << arrival << "arrival coordinates" << arrival << std::endl;
 	    		roots_temp[arrival].push_back(lineage);
 	    	}
 
@@ -131,13 +132,20 @@ int main(){
 			for(auto it2=temp.begin();it2!=temp.end();++it2){
 				std::cout << it2->first;
 				if(it2->second.size()>1){
-					for(auto ind : it2->second){
-						auto pos =std::find(it->second.begin(),it->second.end(),ind);
-						std::cout << pos.type();
-						//auto pos=std::distance(it->second.begin(),std::find(it->second.begin(),it->second.end(),ind));
-						//std::cout << "position dans temp " << pos << "\t";
-						std::cout << "\t" << ind;
+					for(auto indi : it2->second){
+						auto test = std::find(it->second.begin(),it->second.end(),indi);
+						std::cout << " ce que retourne find : " << *test << std::endl;
+						auto pos=std::distance(it->second.begin(),std::find(it->second.begin(),it->second.end(),indi));
+						
+						std::cout << "position dans roots n°" << pos ;
+						std::cout << "\t individu n° " << indi;
+						std::cout << std::endl;
+						it->second.erase(it->second.begin()+pos);
+
 					}
+					it->second.push_back(ind);
+					ind++;
+					aff_map_roots(m_roots);
 				}
 				std::cout << std::endl;
 			}
@@ -151,5 +159,8 @@ int main(){
 			}
 			std::cout << std::endl;
 		}*/
+		++tcoal;
 	}
+	std::cout << "bien joué ta coal est terminée !" << std::endl;
+	std::cout << " ça a pris " << tcoal << " generations !" <<std::endl;
 }
