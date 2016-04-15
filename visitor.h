@@ -6,28 +6,27 @@
 #define __VISITOR_H_INCLUDED__
 
 #include "Node.h"
-#include <iostream>
-#include <string>
 #include <vector>
-#include <algorithm>
-#include <stack>
-#include <iterator>
-#include <queue>
+
+template<typename T>
 class Node;
 
+template<typename T>
 class Visitor{
-
-public:
-
-	void visit(const Node* node);
-
-	std::vector<int> get_vect()  {
-		return res;
-	}
 
 private:
 
-	std::vector<int> res;
+	std::vector<T> res;
+
+public:
+
+	void visit(const Node<T>* node);
+
+	std::vector<T> get_vect()  {
+		return res;
+	}
+
+
 
 };
 

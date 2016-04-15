@@ -8,8 +8,6 @@
 #include <assert.h>
 #include "Node.h"
 
-//#include "visitor.h"
-
 	// XXX
 void aff_vec(std::vector<int> vec) { // surcharge opérateur <<
 
@@ -51,8 +49,8 @@ int main(){
 	test.push_back(0);
 	test.push_back(10);
 	aff_vec(test);
-/*
-	Visitor v;
+
+	Visitor<int> v;
 	v=node4.Bfs(v); 
 	
 	// test 
@@ -66,5 +64,7 @@ int main(){
 	catch(std::string e){
 		cout << e << endl;
 	}
-*/
+
+	std::cout << "Taaaaadaaaaaa <3" << std::endl;
+
 }

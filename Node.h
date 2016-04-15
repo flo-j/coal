@@ -5,20 +5,17 @@
 #ifndef __NODE_H_INCLUDED__
 #define __NODE_H_INCLUDED__
 
-//class Visitor;
-//#include "visitor.h"
 #include <iostream>
 #include <string>
 #include <vector>
-#include <algorithm>
-#include <stack>
-#include <iterator>
 #include <queue>
 
-template <typename T> 
+template<typename T>
+class Visitor;
+
+template <typename T>
 class Node{
 
-//private:
 private:
 	Node<T>* pParent = nullptr; 
 	std::vector<Node<T>*> m_children;
@@ -68,8 +65,8 @@ public:
 		}
 	}
 
-	//Visitor Bfs(Visitor& v) const ;
-	//Visitor Bfs(Visitor& v) ;
+	Visitor<T> Bfs(Visitor<T>& v) const ;
+	Visitor<T> Bfs(Visitor<T>& v) ;
 
 	void print_node() const{
 		std::cout << " le noeud :" ;
@@ -94,4 +91,65 @@ public:
 	}
 };
 
+template<typename T>
+class Visitor{
+
+private:
+
+	std::vector<T> res;
+
+public:
+
+	void visit(const Node<T>* node){
+		res.push_back(node->get_data());
+	}
+
+	std::vector<T> get_vect()  {
+		return res;
+	}
+};
+
+
+template<typename T>
+Visitor<T> Node<T>::Bfs(Visitor<T>& v){
+
+		Node<T>* next;
+		std::queue<Node<T>*> waiting;
+		waiting.push(this);
+
+		while(!waiting.empty()){
+
+			Node<T>* current = waiting.front();
+			waiting.pop();
+			v.visit(current);
+
+			for(auto child : current->m_children){
+				next = child;
+				waiting.push(next);
+			}
+		}
+		return v;
+	}
+
+template<typename T>
+Visitor<T> Node<T>::Bfs(Visitor<T>& v) const{
+		const Node<T>* next;
+		std::queue<const Node<T>*> waiting;
+		waiting.push(this);
+
+		while(!waiting.empty()){
+
+			const auto current_Node = waiting.front();
+			waiting.pop();
+			v.visit(current_Node);
+
+			for(auto child : current_Node->m_children){
+				next = child;
+				waiting.push(next);
+			}
+		}
+		return v;
+	}
+
 #endif
+

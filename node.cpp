@@ -4,16 +4,16 @@
 */
 #include "visitor.h"
 
+template<typename T>
+Visitor<T> Node<T>::Bfs(Visitor<T>& v){
 
-Visitor Node::Bfs(Visitor& v){
-
-		Node* next;
-		std::queue<Node*> waiting;
+		Node<T>* next;
+		std::queue<Node<T>*> waiting;
 		waiting.push(this);
 
 		while(!waiting.empty()){
 
-			Node* current = waiting.front();
+			Node<T>* current = waiting.front();
 			waiting.pop();
 			v.visit(current);
 
@@ -25,9 +25,10 @@ Visitor Node::Bfs(Visitor& v){
 		return v;
 	}
 
-Visitor Node::Bfs(Visitor& v) const{
-		const Node* next;
-		std::queue<const Node*> waiting;
+template<typename T>
+Visitor<T> Node<T>::Bfs(Visitor<T>& v) const{
+		const Node<T>* next;
+		std::queue<const Node<T>*> waiting;
 		waiting.push(this);
 
 		while(!waiting.empty()){
