@@ -5,13 +5,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <algorithm>
-#include <stack>
-#include <iterator>
-#include <queue>
-#include <cassert> // include "assert.h"
-
-#include "visitor.h"
+#include <assert.h>
+#include "Node.h"
 
 	// XXX
 void aff_vec(std::vector<int> vec) { // surcharge opérateur <<
@@ -28,11 +23,11 @@ int main(){
 	using std::endl;
 	// par defaut un noeud est une racine => pointeur null pour le pere
 	// dans les parentheses : on a la valeur contenu par le noeud
-	Node node0(0);
-	Node node1(10);
-	Node node2(30);
-	Node node3(20);
-	Node node4(40);
+	Node<int> node0(0);
+	Node<int> node1(10);
+	Node<int> node2(30);
+	Node<int> node3(20);
+	Node<int> node4(40);
 
 	//node2.AddChildren(node0,node1);
 	node2.AddAChild(node0);
@@ -53,9 +48,9 @@ int main(){
 	test.push_back(20);
 	test.push_back(0);
 	test.push_back(10);
+	aff_vec(test);
 
-
-	Visitor v;
+	Visitor<int> v;
 	v=node4.Bfs(v); 
 	
 	// test 
@@ -69,4 +64,7 @@ int main(){
 	catch(std::string e){
 		cout << e << endl;
 	}
+
+	std::cout << "Taaaaadaaaaaa <3" << std::endl;
+
 }
