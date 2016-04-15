@@ -1,0 +1,3 @@
+./coal
+paste N10.txt N20.txt N30.txt N40.txt N50.txt > N.txt
+R CMD BATCH script_histo_coal.R
