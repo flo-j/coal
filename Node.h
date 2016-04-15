@@ -5,8 +5,8 @@
 #ifndef __NODE_H_INCLUDED__
 #define __NODE_H_INCLUDED__
 
-class Visitor;
-#include "visitor.h"
+//class Visitor;
+//#include "visitor.h"
 #include <iostream>
 #include <string>
 #include <vector>
@@ -15,26 +15,24 @@ class Visitor;
 #include <iterator>
 #include <queue>
 
+template <typename T> 
 class Node{
 
 //private:
 private:
-	Node* pParent = nullptr; 
-	std::vector<Node*> m_children; // vecteur de reference sur les enfants : evite la copie.. 
-	// std::reference_wrapper
-	int m_data; // attention à terme ça devrait etre autre chose qu'un int.. voir comment utiliser les using !
+	Node<T>* pParent = nullptr; 
+	std::vector<Node<T>*> m_children;
+	T m_data;
 
 
 public:
 
-	Node(){} // constructeur par defaut œ
+	Node(){} // constructeur par defaut
 
-	Node(int data){ // si on y ajoute des données
-		pParent=nullptr;
-		m_data=data;
-	} 
+	Node(T data) : pParent(nullptr), m_data(data)
+	{} 
 
-	Node get_parent() const{
+	Node<T> get_parent() const{
 		if(hasParent()){
 			return *pParent;
 		}else{
@@ -42,15 +40,15 @@ public:
 		}
 	}
 	
-	int get_data() const{
+	T get_data() const{
 		return m_data;
 	}
 
-	void AddAChild(Node& node1){
+	void AddAChild(Node<T>& node1){
 		m_children.push_back(&node1);
 	}
 
-	void AddChildren(Node &node1, Node &node2){
+	void AddChildren(Node<T> &node1, Node<T> &node2){
 		//
 		node1.pParent=this; // normalement this correspond au pointeur qui pointe sur le pere ..
 		node2.pParent=this;
@@ -70,8 +68,8 @@ public:
 		}
 	}
 
-	Visitor Bfs(Visitor& v) const ;
-	Visitor Bfs(Visitor& v) ;
+	//Visitor Bfs(Visitor& v) const ;
+	//Visitor Bfs(Visitor& v) ;
 
 	void print_node() const{
 		std::cout << " le noeud :" ;
