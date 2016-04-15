@@ -1,3 +1,7 @@
+/* 	florence jornod
+	aucune garantie
+	g++ -Wall -std=c++11 node_test.cpp visitor.cpp node.cpp
+*/
 #ifndef __NODE_H_INCLUDED__
 #define __NODE_H_INCLUDED__
 
@@ -10,6 +14,7 @@ class Visitor;
 #include <stack>
 #include <iterator>
 #include <queue>
+
 class Node{
 
 //private:
@@ -35,10 +40,6 @@ public:
 		}else{
 			throw std::string("no existing parent, please check current instance of Node has parent.");
 		}
-	}
-
-	std::vector<Node*> get_children() const{
-		return m_children;
 	}
 	
 	int get_data() const{
@@ -68,8 +69,6 @@ public:
 			return false;
 		}
 	}
-
-
 
 	Visitor Bfs(Visitor& v) const ;
 	Visitor Bfs(Visitor& v) ;
